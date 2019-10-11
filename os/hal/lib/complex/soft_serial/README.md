@@ -2,7 +2,9 @@
 
 ## Usage
 
-This is an example for STM32F103 mcu with a custom managed timer, can be used with a GPT timer, which I believe has an easier setup.
+This is an example for STM32F103 MCU.
+
+The driver needs a `Tick` function to be called at exactly X times the desired baud rate, in this example, the X is the define `SSD1_BITRATE_MULTIPLIER`, which is 4 times. The timer is setup using the register directly, but could be used a GPT and the Tick function in the callback.
 
 ### Setup
 
@@ -30,6 +32,10 @@ static const SoftSerialConfig ssd1_config = {
     SSD1_1_TX_LINE};
 
 SoftSerialDriver SSD1;
+
+/*
+ * TIMER SETUP
+ */
 
 OSAL_IRQ_HANDLER(SSD1_TIMER_HANDLER)
 {
@@ -74,6 +80,10 @@ static void timerStart(void)
     SSD1_TIMER->CR1 = STM32_TIM_CR1_CEN;   // Enable Timer
     SSD1_TIMER->DIER = STM32_TIM_DIER_UIE; // Update Event IRQ enabled
 }
+
+/*
+ * INITIALIZATION
+ */
 
 void softSerialInit(void)
 {
