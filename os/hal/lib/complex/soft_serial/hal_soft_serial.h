@@ -1,5 +1,5 @@
 /*
-    ChibiOS - Copyright (C) 2019 Tercio Gaudencio Filho
+    ChibiOS - Copyright (C) 2019 Giovanni Di Sirio
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 /**
  * @file    hal_soft_serial.h
  * @brief   Software Serial Driver macros and structures.
+ * @author  Tercio Gaudencio Filho
  *
  * @addtogroup SOFT_SERIAL
  * @{
