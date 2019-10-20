@@ -256,25 +256,14 @@ typedef struct
  * @param[in] n         the stack size to be assigned to the thread
  */
 #define THD_WORKING_AREA(tname, tsize)      \
-  static StaticTask_t xTask##tname##Buffer; \
-  static StackType_t xTask##tname##Stack[tsize];
+  static StaticTask_t tname##Buffer; \
+  static StackType_t tname##Stack[tsize];
 
 /**
  * @brief   Thread declaration macro.
  */
-#define THD_FUNCTION(tname, tparam) static __attribute__((noreturn)) void prvTask##tname(void *tparam)
+#define THD_FUNCTION(tname, tparam) static __attribute__((noreturn)) void tname(void *tparam)
 
-/**
- * @brief   Static Thread creating helper, to be used with THD_WORKING_AREA and THD_FUNCTION macros.
- */
-#define THD_CREATE(tname, tlabel, tsize, tprio)                                              \
-  xTaskCreateStatic(prvTask##tname,         /* Thread Function                            */ \
-                    tlabel,                 /* Thread Name                                */ \
-                    tsize,                  /* Thread Stack                               */ \
-                    NULL,                   /* Parameters                                 */ \
-                    tprio,                  /* Priority                                   */ \
-                    xTask##tname##Stack,    /* Array to use as the task's stack           */ \
-                    &xTask##tname##Buffer); /* Variable to hold the task's data structure */
 /** @} */
 
 /**
