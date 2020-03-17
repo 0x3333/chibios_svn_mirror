@@ -90,16 +90,17 @@
                 .cpu    cortex-m3
 
                 .thumb
-                .text
 
                 .section .sandbox, "ax"
                 .align      4
                 .globl      _sandbox
-_sandbox:       .long       0xFE9154C0U
-                .long       0x0C4519EFU
+_sandbox:       .long       0xFE9154C0
+                .long       0x0C4519EF
                 .long       16
                 .long       0
+                b           _crt0_entry
 
+                .text
 /*
  * CRT0 entry point.
  */

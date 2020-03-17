@@ -61,7 +61,7 @@
 #define STM32_PLLSRC                        ${doc.STM32_PLLSRC!"STM32_PLLSRC_HSI16"}
 #define STM32_PLLM_VALUE                    ${doc.STM32_PLLM_VALUE!"2"}
 #define STM32_PLLN_VALUE                    ${doc.STM32_PLLN_VALUE!"16"}
-#define STM32_PLLP_VALUE                    ${doc.STM32_PLLP_VALUE!"4"}
+#define STM32_PLLP_VALUE                    ${doc.STM32_PLLP_VALUE!"2"}
 #define STM32_PLLQ_VALUE                    ${doc.STM32_PLLQ_VALUE!"4"}
 #define STM32_PLLR_VALUE                    ${doc.STM32_PLLR_VALUE!"2"}
 #define STM32_HPRE                          ${doc.STM32_HPRE!"STM32_HPRE_DIV1"}
@@ -94,10 +94,11 @@
 #define STM32_IRQ_EXTI0_1_PRIORITY          ${doc.STM32_IRQ_EXTI0_1_PRIORITY!"3"}
 #define STM32_IRQ_EXTI2_3_PRIORITY          ${doc.STM32_IRQ_EXTI2_3_PRIORITY!"3"}
 #define STM32_IRQ_EXTI4_15_PRIORITY         ${doc.STM32_IRQ_EXTI4_15_PRIORITY!"3"}
+#define STM32_IRQ_EXTI1921_PRIORITY         ${doc.STM32_IRQ_EXTI1921_PRIORITY!"3"}
 
 #define STM32_IRQ_USART1_PRIORITY           ${doc.STM32_IRQ_USART1_PRIORITY!"2"}
 #define STM32_IRQ_USART2_PRIORITY           ${doc.STM32_IRQ_USART2_PRIORITY!"2"}
-#define STM32_IRQ_USART3_USART4_LPUART1_PRIORITY ${doc.STM32_IRQ_USART3_USART4_LPUART1_PRIORITY!"1"}
+#define STM32_IRQ_USART3_4_LP1_PRIORITY     ${doc.STM32_IRQ_USART3_4_LP1_PRIORITY!"2"}
 
 #define STM32_IRQ_TIM1_UP_PRIORITY          ${doc.STM32_IRQ_TIM1_UP_PRIORITY!"1"}
 #define STM32_IRQ_TIM1_CC_PRIORITY          ${doc.STM32_IRQ_TIM1_CC_PRIORITY!"1"}
@@ -113,6 +114,12 @@
 /*
  * ADC driver system settings.
  */
+#define STM32_ADC_USE_ADC1                  ${doc.STM32_ADC_USE_ADC1!"FALSE"}
+#define STM32_ADC_ADC1_CKMODE               ${doc.STM32_ADC_ADC1_CKMODE!"STM32_ADC_CKMODE_ADCCLK"}
+#define STM32_ADC_ADC1_DMA_PRIORITY         ${doc.STM32_ADC_ADC1_DMA_PRIORITY!"2"}
+#define STM32_ADC_ADC1_DMA_IRQ_PRIORITY     ${doc.STM32_ADC_ADC1_DMA_IRQ_PRIORITY!"2"}
+#define STM32_ADC_ADC1_DMA_STREAM           ${doc.STM32_ADC_ADC1_DMA_STREAM!"STM32_DMA_STREAM_ID_ANY"}
+#define STM32_ADC_PRESCALER_VALUE           ${doc.STM32_ADC_PRESCALER_VALUE!"2"}
 
 /*
  * DAC driver system settings.
@@ -207,7 +214,9 @@
 
 /*
  * TRNG driver system settings.
+ * NOTE: STM32G081 only.
  */
+#define STM32_TRNG_USE_RNG1                 ${doc.STM32_TRNG_USE_RNG1!"FALSE"}
 
 /*
  * UART driver system settings.

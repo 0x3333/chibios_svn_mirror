@@ -18,7 +18,7 @@
 */
 
 /**
- * @file    chobjcaches.h
+ * @file    oslib/include/chobjcaches.h
  * @brief   Objects Caches macros and structures.
  *
  * @addtogroup oslib_objchaches
@@ -185,10 +185,6 @@ struct ch_oc_object {
    *          @p chCacheObjectInit() initializes it to @p NULL.
    */
   void                  *dptr;
-  /**
-   * @brief   Embedded data as an open array.
-   */
-  uint8_t               dbuf[];
 };
 
 /**

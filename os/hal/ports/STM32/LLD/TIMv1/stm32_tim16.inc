@@ -35,9 +35,22 @@
 #error "STM32_HAS_TIM16 not defined in registry"
 #endif
 
-#if STM32_HAS_TIM16 == FALSE
-#error "TIM16 not present"
+/* Driver checks for robustness, undefined USE macros are defaulted to
+   FALSE. This makes this module independent from drivers implementation.*/
+#if !defined(STM32_GPT_USE_TIM16)
+#define STM32_GPT_USE_TIM16                 FALSE
 #endif
+#if !defined(STM32_ICU_USE_TIM16)
+#define STM32_ICU_USE_TIM16                 FALSE
+#endif
+#if !defined(STM32_PWM_USE_TIM16)
+#define STM32_PWM_USE_TIM16                 FALSE
+#endif
+#if !defined(STM32_ST_USE_TIM16)
+#define STM32_ST_USE_TIM16                  FALSE
+#endif
+
+#if STM32_HAS_TIM16
 
 /* Priority settings checks.*/
 #if !defined(STM32_IRQ_TIM16_PRIORITY)
@@ -47,6 +60,8 @@
 #if !OSAL_IRQ_IS_VALID_PRIORITY(STM32_IRQ_TIM16_PRIORITY)
 #error "Invalid IRQ priority assigned to STM32_IRQ_TIM16_PRIORITY"
 #endif
+
+#endif /* STM32_HAS_TIM16 */
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */
@@ -76,9 +91,7 @@ static inline void tim16_irq_deinit(void) {
 /* Driver interrupt handlers.                                                */
 /*===========================================================================*/
 
-#if (HAL_USE_GPT && STM32_GPT_USE_TIM16) ||                                  \
-    (HAL_USE_PWM && STM32_PWM_USE_TIM16) ||                                  \
-    defined(__DOXYGEN__)
+#if defined(STM32_TIM16_IS_USED) || defined(__DOXYGEN__)
 /**
  * @brief   TIM16 interrupt handler.
  *
@@ -93,9 +106,19 @@ OSAL_IRQ_HANDLER(STM32_TIM16_HANDLER) {
   gpt_lld_serve_interrupt(&GPTD16);
 #endif
 #endif
+#if HAL_USE_ICU
+#if STM32_ICU_USE_TIM16
+  icu_lld_serve_interrupt(&ICUD16);
+#endif
+#endif
 #if HAL_USE_PWM
 #if STM32_PWM_USE_TIM16
   pwm_lld_serve_interrupt(&PWMD16);
+#endif
+#endif
+#if 1
+#if STM32_ST_USE_TIM16
+  st_lld_serve_interrupt();
 #endif
 #endif
 

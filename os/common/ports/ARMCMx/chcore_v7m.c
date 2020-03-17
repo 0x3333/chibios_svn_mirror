@@ -124,13 +124,15 @@ void SVC_Handler(void) {
 /*lint -restore*/
   uint32_t psp = __get_PSP();
 
-  chDbgAssert(((uint32_t)__builtin_return_address(0) & 4U) != 0U,
-              "not process");
-
 #if PORT_USE_SYSCALL == TRUE
   uint32_t control;
   /* Caller context.*/
   struct port_extctx *ectxp = (struct port_extctx *)psp;
+
+#if defined(__GNUC__)
+  chDbgAssert(((uint32_t)__builtin_return_address(0) & 4U) != 0U,
+              "not process");
+#endif
 
   /* Checking if the SVC instruction has been used from privileged or
      non-privileged mode.*/
@@ -273,7 +275,7 @@ void port_init(void) {
 
     /* Setting up the guard page on the main() function stack base
        initially.*/
-    mpuConfigureRegion(PORT_USE_MPU_REGION,
+    mpuConfigureRegion(PORT_USE_GUARD_MPU_REGION,
                        &__main_thread_stack_base__,
                        MPU_RASR_ATTR_AP_NA_NA |
                        MPU_RASR_ATTR_NON_CACHEABLE |
@@ -296,7 +298,7 @@ void port_init(void) {
  */
 void _port_set_region(void) {
 
-  mpuSetRegionAddress(PORT_USE_MPU_REGION,
+  mpuSetRegionAddress(PORT_USE_GUARD_MPU_REGION,
                       chThdGetSelfX()->wabase);
 }
 #endif
