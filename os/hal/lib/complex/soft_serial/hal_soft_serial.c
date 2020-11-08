@@ -314,14 +314,8 @@ void ssdTickI(SoftSerialDriver *ssdp) {
       /**
        * Multiplier(Start Bit) + 1/2 Multiplier(Center of the first bit), try to
        * be as much as possible to the center of the bit.
-       *
-       * To be at the center of the bit, if we sampled exaclty at the time of
-       * the start bit, would be (config->multiplier) ticks for the start bit +
-       * (config->multiplier)/2 ticks for the center of the bit to sample, but
-       * more probably we miss the first tick, so should be (config->multiplier)
-       * + (config->multiplier)/2 - 1.
        */
-      channelIncTickBy(ssdp, rx, (ssdp->config->multiplier / 2) - 1);
+      channelIncTickBy(ssdp, rx, (ssdp->config->multiplier / 2));
     }
   } else if (ssdp->rx.state == SSD_CH_BIT) {
     if (ssdp->rx.tick == ssdp->tick) {
