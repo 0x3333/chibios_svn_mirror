@@ -1,5 +1,5 @@
 /*
-    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
+    ChibiOS - Copyright (C) 2006..2020 Giovanni Di Sirio
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -694,25 +694,25 @@
  *
  * @api
  */
-#define rccEnableETH(lp) rccEnableAHB1(RCC_AHB1ENR_ETHMACEN |               \
-                                       RCC_AHB1ENR_ETHMACTXEN |             \
-                                       RCC_AHB1ENR_ETHMACRXEN, lp)
+#define rccEnableETH(lp) rccEnableAHB1(RCC_AHB1ENR_ETH1MACEN |               \
+                                       RCC_AHB1ENR_ETH1TXEN |             \
+                                       RCC_AHB1ENR_ETH1RXEN, lp)
 
 /**
  * @brief   Disables the ETH peripheral clock.
  *
  * @api
  */
-#define rccDisableETH() rccDisableAHB1(RCC_AHB1ENR_ETHMACEN |            \
-                                          RCC_AHB1ENR_ETHMACTXEN |          \
-                                          RCC_AHB1ENR_ETHMACRXEN)
+#define rccDisableETH() rccDisableAHB1(RCC_AHB1ENR_ETH1MACEN |            \
+                                          RCC_AHB1ENR_ETH1TXEN |          \
+                                          RCC_AHB1ENR_ETH1RXEN)
 
 /**
  * @brief   Resets the ETH peripheral.
  *
  * @api
  */
-#define rccResetETH() rccResetAHB1(RCC_AHB1RSTR_ETHMACRST)
+#define rccResetETH() rccResetAHB1(RCC_AHB1RSTR_ETH1MACRST)
 /** @} */
 
 /**
@@ -1013,21 +1013,21 @@
  *
  * @api
  */
-#define rccEnableSDMMC2(lp) rccEnableAHB3(RCC_AHB3ENR_SDMMC2EN, lp)
+#define rccEnableSDMMC2(lp) rccEnableAHB2(RCC_AHB2ENR_SDMMC2EN, lp)
 
 /**
  * @brief   Disables the SDMMC2 peripheral clock.
  *
  * @api
  */
-#define rccDisableSDMMC2() rccDisableAHB3(RCC_AHB3ENR_SDMMC2EN)
+#define rccDisableSDMMC2() rccDisableAHB2(RCC_AHB2ENR_SDMMC2EN)
 
 /**
  * @brief   Resets the SDMMC2 peripheral.
  *
  * @api
  */
-#define rccResetSDMMC2() rccResetAHB3(RCC_AHB3RSTR_SDMMC2RST)
+#define rccResetSDMMC2() rccResetAHB2(RCC_AHB2RSTR_SDMMC2RST)
 /** @} */
 
 /**

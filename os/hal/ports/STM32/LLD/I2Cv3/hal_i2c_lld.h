@@ -379,6 +379,12 @@
 #endif
 #endif
 
+#if STM32_I2C_USE_I2C4
+#define STM32_I2C_BDMA_REQUIRED
+#if !defined(STM32_BDMA_REQUIRED)
+#define STM32_BDMA_REQUIRED
+#endif
+#endif
 #else /* STM32_I2C4_USE_BDMA != TRUE */
 
 #if STM32_I2C_USE_I2C1 || STM32_I2C_USE_I2C2 || STM32_I2C_USE_I2C3 || STM32_I2C_USE_I2C4
@@ -389,15 +395,6 @@
 #endif
 
 #endif /* STM32_I2C4_USE_BDMA != TRUE */
-
-#if STM32_I2C4_USE_BDMA == TRUE
-#if STM32_I2C_USE_I2C4
-#define STM32_I2C_BDMA_REQUIRED
-#if !defined(STM32_BDMA_REQUIRED)
-#define STM32_BDMA_REQUIRED
-#endif
-#endif
-#endif /* STM32_I2C4_USE_BDMA == TRUE */
 
 #endif /* STM32_I2C_USE_DMA == TRUE */
 
@@ -486,7 +483,7 @@ struct I2CDriver {
    * @brief TX DMA mode bit mask.
    */
   uint32_t                  txdmamode;
-#if defined(STM32_I2C_DMA_REQUIRED) && defined(STM32_I2C_BDMA_REQUIRED)
+#if defined(STM32_I2C_DMA_REQUIRED) && defined(STM32_BDMA_REQUIRED)
   /**
    * @brief   DMA type for this instance.
    */
@@ -503,7 +500,7 @@ struct I2CDriver {
     const stm32_dma_stream_t  *dma;
 #endif
 #if (STM32_I2C4_USE_BDMA == TRUE) || defined(__DOXYGEN__)
-#if defined(STM32_I2C_BDMA_REQUIRED) || defined(__DOXYGEN__)
+#if defined(STM32_BDMA_REQUIRED) || defined(__DOXYGEN__)
     /**
      * @brief   Receive BDMA stream.
      */
@@ -522,7 +519,7 @@ struct I2CDriver {
     const stm32_dma_stream_t  *dma;
 #endif
 #if (STM32_I2C4_USE_BDMA == TRUE) || defined(__DOXYGEN__)
-#if defined(STM32_I2C_BDMA_REQUIRED) || defined(__DOXYGEN__)
+#if defined(STM32_BDMA_REQUIRED) || defined(__DOXYGEN__)
     /**
      * @brief   Transmit DMA stream.
      */
